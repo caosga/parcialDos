@@ -35,6 +35,16 @@ import java.util.List;
         this.listCinePelicula=new ArrayList<>();
     }
 
+    //Metodo para agregar una Pelicula
+        public String agregarPelicula(Pelicula nuevaPeli){
+         for(Pelicula p:listCinePelicula){
+             if(p.getCodigoPel().equalsIgnoreCase(nuevaPeli.getCodigoPel())){
+             return "Ya existe";}
+         }
+         this.listCinePelicula.add(nuevaPeli);
+            return "Agregada exitosamente.";
+        }
+
     public String getNombreCine() {
         return nombreCine;
     }
