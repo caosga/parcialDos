@@ -65,7 +65,7 @@ import java.util.List;
             Pelicula peliculaNueva=nuevaFuncion.getThePelicula();
 
             int duracionPel=peliculaNueva.getDuracion();
-            LocalDateTime
+           // LocalDateTime
 
             if(salaNueva==null||peliculaNueva==null){
                 return "No hay una sala o pelicula asociada a esta funcion";
