@@ -6,6 +6,7 @@ public class Pelicula {
     private String codigoPel, titulo;
     private Genero genero;
     private Clasificacion clasif;
+    private int duracion;
 
     //Relacion de la clase Pelicula
     private List<Funcion> listFuncionPelicula;
@@ -64,5 +65,13 @@ public class Pelicula {
 
     public void setListFuncionPelicula(List<Funcion> listFuncionPelicula) {
         this.listFuncionPelicula = listFuncionPelicula;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
     }
 }

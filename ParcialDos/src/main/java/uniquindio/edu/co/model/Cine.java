@@ -1,5 +1,6 @@
 package uniquindio.edu.co.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,13 +37,48 @@ import java.util.List;
     }
 
     //Metodo para agregar una Pelicula
-        public String agregarPelicula(Pelicula nuevaPeli){
+        public String agregarPelicula(Pelicula agregaPeli){
          for(Pelicula p:listCinePelicula){
-             if(p.getCodigoPel().equalsIgnoreCase(nuevaPeli.getCodigoPel())){
-             return "Ya existe";}
+             if(p.getCodigoPel().equalsIgnoreCase(agregaPeli.getCodigoPel())){
+                 return "Ya existe";}
          }
-         this.listCinePelicula.add(nuevaPeli);
+         this.listCinePelicula.add(agregaPeli);
             return "Agregada exitosamente.";
+        }
+
+     //Metodo para agregar un Cliente
+        public String agregarCliente(Cliente nuevoCliente) {
+            for (Persona p : listCinePersona) {
+                if(p.getDocumento().equalsIgnoreCase(nuevoCliente.getDocumento())){
+                    return "Este documento ya se encuentra registrado";
+                }
+            }
+        this.listCinePersona.add(nuevoCliente);
+        return "Cliente registrado exitosamente";
+    }
+
+    //Metodo para programar una funcion
+        public String programaFuncion(Funcion nuevaFuncion){
+
+            LocalDateTime inicioFuncion=nuevaFuncion.getHora();
+            Sala salaNueva=nuevaFuncion.getTheSala();
+            Pelicula peliculaNueva=nuevaFuncion.getThePelicula();
+
+            int duracionPel=peliculaNueva.getDuracion();
+            LocalDateTime
+
+            if(salaNueva==null||peliculaNueva==null){
+                return "No hay una sala o pelicula asociada a esta funcion";
+            }
+
+        for(Funcion f:listCineFuncion){
+
+                return "";
+                }
+
+
+
+        return "";
         }
 
     public String getNombreCine() {
