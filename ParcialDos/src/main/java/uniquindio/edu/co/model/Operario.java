@@ -32,8 +32,8 @@ public class Operario extends Persona {
     }
 
     //Metodo para que el operador registre ventas
-    public Venta registrarVenta() {
-        return null;
+    public String registrarVentas(Cine cine, Venta nuevaVenta, Funcion funcion, List<String> codigosDeseados) {
+        return cine.procesarVenta(this, nuevaVenta, funcion, codigosDeseados);
     }
 
     public String getCodigoEmpleado() {

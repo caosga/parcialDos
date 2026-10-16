@@ -2,7 +2,7 @@ package uniquindio.edu.co.model;
 
 public class Asiento {
     private String codigoAsiento;
-    private boolean ocuapado;
+    private boolean ocupado;
     private String fila;
     private int columna;
 
@@ -17,7 +17,7 @@ public class Asiento {
     public Asiento(String codigoAsiento, String fila, boolean ocuapado, int columna) {
         this.codigoAsiento = codigoAsiento;
         this.fila = fila;
-        this.ocuapado = ocuapado;
+        this.ocupado = ocuapado;
         this.columna = columna;
     }
 
@@ -29,12 +29,12 @@ public class Asiento {
         this.codigoAsiento = codigoAsiento;
     }
 
-    public boolean isOcuapado() {
-        return ocuapado;
+    public boolean isOcupado() {
+        return ocupado;
     }
 
-    public void setOcuapado(boolean ocuapado) {
-        this.ocuapado = ocuapado;
+    public void setOcupado(boolean ocuapado) {
+        this.ocupado = ocuapado;
     }
 
     public String getFila() {

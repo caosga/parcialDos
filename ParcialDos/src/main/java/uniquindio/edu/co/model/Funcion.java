@@ -8,6 +8,7 @@ public class Funcion {
     private String codigoFunc;
     private LocalDate fecha;
     private LocalDateTime hora;
+    private double precioBase;
 
     //Relaciones de la Clase Funcion
     private Pelicula thePelicula;
@@ -30,6 +31,7 @@ public class Funcion {
         this.thePelicula = thePelicula;
         this.listVentaFuncion = listVentaFuncion;
         this.theSala = theSala;
+        this.precioBase=precioBase;
     }
 
     public String getCodigoFunc() {
@@ -78,5 +80,13 @@ public class Funcion {
 
     public void setListVentaFuncion(List<Venta> listVentaFuncion) {
         this.listVentaFuncion = listVentaFuncion;
+    }
+
+    public double getPrecioBase() {
+        return precioBase;
+    }
+
+    public void setPrecioBase(double precioBase) {
+        this.precioBase = precioBase;
     }
 }

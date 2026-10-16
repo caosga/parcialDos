@@ -47,6 +47,7 @@ import java.util.List;
             return "Agregada exitosamente.";
         }
 
+
      //Metodo para agregar un Cliente
         public String agregarCliente(Cliente nuevoCliente) {
             for (Persona p : listCinePersona) {
@@ -58,6 +59,7 @@ import java.util.List;
         return "Cliente registrado exitosamente";
     }
 
+
     //Metodo para programar una funcion
         public String programaFuncion(Funcion nuevaFuncion){
 
@@ -66,21 +68,24 @@ import java.util.List;
 
             Sala salaNueva=nuevaFuncion.getTheSala();
             Pelicula peliculaNueva=nuevaFuncion.getThePelicula();
+
         //calcula la duracion de la pelicula
             int duracionPel=peliculaNueva.getDuracion();
             LocalDateTime finPeli=horaFuncion.plusMinutes(duracionPel);
+
         //verifica que la sala y pelicula existan
             if(salaNueva==null||peliculaNueva==null){
-                return "No hay una sala o pelicula asociada a esta funcion";
-            }
+                return "No hay una sala o pelicula asociada a esta funcion"; }
 
         for(Funcion f:listCineFuncion){
+
         //compara la sala y la fecha
             if(f.getTheSala().getCodigoSala().equalsIgnoreCase(salaNueva.getCodigoSala())
                     && f.getFecha().equals(fechaFuncion)){
                 LocalDateTime horaActual=f.getHora();
                 int duracionActual=f.getThePelicula().getDuracion();
                 LocalDateTime finActual=horaActual.plusMinutes(duracionActual);
+
            //Compara las horas
                 if(horaActual.isBefore(finActual)&&horaActual.isBefore(finPeli)){
                     return "La sala ocupada, no disponible.";
@@ -91,6 +96,71 @@ import java.util.List;
             return "Funcion programa exitosamente.";
         }
 
+
+    //Metodo para procesar una venta
+        public String procesarVenta(Operario operario, Venta nuevaVenta, Funcion funcion, List<String> codigosAsiento) {
+            Sala estaSala = funcion.getTheSala();
+            Cliente esteCliente=nuevaVenta.getTheCliente();
+            List<Asiento> asientosAComprar = new ArrayList<>();
+            TipoSala tipo=funcion.getTheSala().getTipo();
+            double precioBase=funcion.getPrecioBase();
+
+            double recargo=0;
+            switch (tipo) {
+                case TRADICIONAL:
+                    recargo = 0;
+                    break;
+                case VIP:
+                    recargo = 0.3;
+                    break;
+                case SALA_3D:
+                    recargo = 0.4;
+                default:
+
+                    break;
+            }
+            double valorFinalPorAsiento = esteCliente.calcularDescuento(precioBase, recargo);
+
+
+            //Busca el asiento comparando el codigo que ingresó el usuario
+            for (String codigo : codigosAsiento) {
+                for (Asiento a : estaSala.getListAsiento()) {
+                    if (a.getCodigoAsiento().equalsIgnoreCase(codigo)) {
+                        asientosAComprar.add(a);
+                        break;
+                    }
+                }
+            }
+            //Valida si el asiento está ocupado
+            for (Asiento a : asientosAComprar) {
+                if (a.isOcupado()) {
+                    return "El asiento " + a.getCodigoAsiento() + " ya está ocupado.";
+                }
+            }
+            //Cambiar estado de asientos a ocupados
+            for (Asiento a : asientosAComprar) {
+                a.setOcupado(true);
+            }
+            //Asocia el operario y agrega la venta a la lista cineVenta
+            nuevaVenta.setTheOperario(operario);
+            operario.getListVentaOperario().add(nuevaVenta);
+            this.listCineVenta.add(nuevaVenta);
+
+            //creacion del boleto
+            for (Asiento a : asientosAComprar) {
+                Boleto unBoleto = new Boleto(
+                        nuevaVenta.getCodigoVenta(),
+                        funcion.getFecha().toString(),
+                        funcion.getThePelicula().getTitulo(),
+                        funcion.getTheSala().getCodigoSala(),
+                        a.getCodigoAsiento(),
+                        valorFinalPorAsiento
+                );
+            }
+
+            return "Venta registrada con éxito.\nAtendido por: " + operario.getNombre();
+
+        }
 
     public String getNombreCine() {
         return nombreCine;
