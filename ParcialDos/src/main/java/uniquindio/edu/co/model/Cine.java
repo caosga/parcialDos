@@ -102,8 +102,25 @@ import java.util.List;
             Sala estaSala = funcion.getTheSala();
             Cliente esteCliente=nuevaVenta.getTheCliente();
             List<Asiento> asientosAComprar = new ArrayList<>();
+            TipoSala tipo=funcion.getTheSala().getTipo();
             double precioBase=funcion.getPrecioBase();
-            double valorFinalPorAsiento = esteCliente.calcularDescuento(precioBase);
+
+            double recargo=0;
+            switch (tipo) {
+                case TRADICIONAL:
+                    recargo = 0;
+                    break;
+                case VIP:
+                    recargo = 0.3;
+                    break;
+                case SALA_3D:
+                    recargo = 0.4;
+                default:
+
+                    break;
+            }
+            double valorFinalPorAsiento = esteCliente.calcularDescuento(precioBase, recargo);
+
 
             //Busca el asiento comparando el codigo que ingresó el usuario
             for (String codigo : codigosAsiento) {
@@ -113,10 +130,6 @@ import java.util.List;
                         break;
                     }
                 }
-            }
-            // Validación de codigo erroneo
-            if (asientosAComprar.isEmpty()) {
-                return "Asiento no encontrado";
             }
             //Valida si el asiento está ocupado
             for (Asiento a : asientosAComprar) {

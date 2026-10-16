@@ -26,14 +26,14 @@ public class Cliente extends Persona{
     }
 
     //metodo para calcular porcentaje de descuento del cliente
-    public double calcularDescuento(double precioBase) {
+    public double calcularDescuento(double precioBase, double tipoSala) {
         double descuento;
         if (compra> 50000) {
-            return descuento=precioBase-(compra*0.2); // 20%
+            return descuento=precioBase-(compra*0.2)+tipoSala; // 20%
         } else if (compra > 20000) {
-            return descuento=precioBase-(compra*0.1); // 10%
+            return descuento=precioBase-(compra*0.1)+tipoSala; // 10%
         }
-        return precioBase;
+        return precioBase+tipoSala;
     }
 
     public String getCodigoAfiliacion() {
