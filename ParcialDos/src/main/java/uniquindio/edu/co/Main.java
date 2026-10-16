@@ -1,8 +1,9 @@
 package uniquindio.edu.co;
 import javax.swing.JOptionPane;
+import uniquindio.edu.co.model.Pelicula;
+import uniquindio.edu.co.model.Cliente;
 import uniquindio.edu.co.model.Genero;
 import uniquindio.edu.co.model.Clasificacion;
-import uniquindio.edu.co.model.Pelicula;
 import uniquindio.edu.co.model.Cine;
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class Main {
                             "1. Registrar películas\n" +
                             "2. Registrar clientes\n" +
                             "3. Registrar operarios\n" +
-                            "4. Registrar Programar funciones\n" +
+                            "4. Programar funciones\n" +
                             "5. Vender boletas\n" +
                             "6. Ver ocupación de las salas\n" +
                             "7. Revisar ingresos por función\n" +
@@ -95,9 +96,27 @@ public class Main {
 
 
                 case 2:
-                    JOptionPane.showMessageDialog(null,
-                            "Registrando clientes");
+
+                    String documento = JOptionPane.showInputDialog(null, "Ingrese el documento del cliente:");
+
+                    String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre completo del cliente:");
+
+                    String correo = JOptionPane.showInputDialog(null, "Ingrese el correo electronico del cliente:");
+
+                    String codigoAfiliacion = JOptionPane.showInputDialog(null, "Ingrese el codigo de afiliacion:");
+
+                    double compra = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el valor de las compras del cliente:"));
+
+                    Cliente nuevoCliente = new Cliente(
+                            documento, nombre, correo, codigoAfiliacion, compra);
+
+                    String resultado = cine.agregarCliente(nuevoCliente);
+
+                    JOptionPane.showMessageDialog(null, resultado);
+
                     break;
+
+
                 case 3:
                     JOptionPane.showMessageDialog(null,
                             "Registrando operarios");
