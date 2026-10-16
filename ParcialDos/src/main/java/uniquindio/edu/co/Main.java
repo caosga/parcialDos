@@ -1,11 +1,28 @@
 package uniquindio.edu.co;
 import javax.swing.JOptionPane;
+import uniquindio.edu.co.model.Genero;
+import uniquindio.edu.co.model.Clasificacion;
+import uniquindio.edu.co.model.Pelicula;
+import uniquindio.edu.co.model.Cine;
+import java.util.ArrayList;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+
+        Cine cine = new Cine(
+                "CinePlus",
+                "647756644",
+                "Armenia, Quindío",
+                new ArrayList<>(),
+                new ArrayList<>(),
+                new ArrayList<>(),
+                new ArrayList<>()
+        );
+
+
 
         int opcion = 0;
 
@@ -24,10 +41,59 @@ public class Main {
                             "9. Salir\n"));
             switch (opcion) {
 
+
+
                 case 1:
-                    JOptionPane.showMessageDialog(null,
-                            "Registrando Peliculas");
+                    String codigo = JOptionPane.showInputDialog(null, "Ingrese el código de la película:");
+
+                    String titulo = JOptionPane.showInputDialog(null, "Ingrese el título de la película:");
+
+                    int duracion = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la duración en minutos:"));
+
+
+                    String generoTexto = JOptionPane.showInputDialog(null,
+                            "Ingrese el género de la película:\n" +
+                                    "\n" +
+                                    "1. ACCION\n" +
+                                    "2. TERROR\n" +
+                                    "3. ANIME");
+
+                    Genero genero = Genero.ACCION;
+
+                    if (generoTexto.equals("2")) {
+                        genero = Genero.TERROR;
+                    } else if (generoTexto.equals("3")) {
+                        genero = Genero.ANIME;
+                    }
+
+                    String clasificacionTexto = JOptionPane.showInputDialog(null,
+                            "Ingrese la clasificación:\n" +
+                                    "\n" +
+                                    "1. ADULTOS\n" +
+                                    "2. ADOLESCENTES\n" +
+                                    "3. NINIO");
+
+                    Clasificacion clasif = Clasificacion.ADULTOS;
+
+                    if (clasificacionTexto.equals("2")) {
+                        clasif = Clasificacion.ADOLESCENTES;
+                    } else if (clasificacionTexto.equals("3")) {
+                        clasif = Clasificacion.NINIO;
+                    }
+
+                    Pelicula pelicula = new Pelicula(
+                            codigo, titulo, genero, new ArrayList<>(), clasif);
+
+                    pelicula.setDuracion(duracion);
+
+                    String respuesta = cine.agregarPelicula(pelicula);
+
+                    JOptionPane.showMessageDialog(null, respuesta);
+
                     break;
+
+
+
                 case 2:
                     JOptionPane.showMessageDialog(null,
                             "Registrando clientes");
