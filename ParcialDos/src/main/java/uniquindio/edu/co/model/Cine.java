@@ -48,6 +48,7 @@ import java.util.List;
         }
 
 
+
      //Metodo para agregar un Cliente
         public String agregarCliente(Cliente nuevoCliente) {
             for (Persona p : listCinePersona) {
@@ -58,6 +59,7 @@ import java.util.List;
         this.listCinePersona.add(nuevoCliente);
         return "Cliente registrado exitosamente";
     }
+
 
 
     //Metodo para programar una funcion
@@ -121,7 +123,6 @@ import java.util.List;
             }
             double valorFinalPorAsiento = esteCliente.calcularDescuento(precioBase, recargo);
 
-
             //Busca el asiento comparando el codigo que ingresó el usuario
             for (String codigo : codigosAsiento) {
                 for (Asiento a : estaSala.getListAsiento()) {
@@ -160,6 +161,42 @@ import java.util.List;
 
             return "Venta registrada con éxito.\nAtendido por: " + operario.getNombre();
 
+        }
+
+    //Metodo para calcular total de venta
+        public double calcularTotalVenta(String codigoVenta) {
+            Venta ventaEncontrada = null;
+
+            //Busca la venta por su código en la lista de ventas del cine
+            for (Venta v : listCineVenta) {
+                if (v.getCodigoVenta().equalsIgnoreCase(codigoVenta)) {
+                    ventaEncontrada = v;
+                    break;
+                }
+            }
+
+            //Sumar los valores individuales de las boletas adquiridas
+            double totalVenta = 0.0;
+            for (Boleto b : ventaEncontrada.getBoletoVenta()) {
+                totalVenta += b.valorPagado();
+            }
+            return totalVenta;
+        }
+
+
+    //Metodo para calcular el porcentaje de ocupacion de una funcion
+        public double calcularPorcentajeOcupacion(Funcion funcion) {
+            Sala sala=funcion.getTheSala();
+            double capacidadMax= sala.getCapacidad();
+
+            // Cuenta cuantos asientos están ocupados en la sala de esta función
+            int asientoOcupados=0;
+            for (Asiento a: sala.getListAsiento()) {
+                if (a.isOcupado()) {
+                    asientoOcupados++;
+                }
+            }
+            return (asientoOcupados / capacidadMax) * 100.0;
         }
 
     public String getNombreCine() {

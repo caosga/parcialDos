@@ -1,6 +1,7 @@
 package uniquindio.edu.co.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Venta {
     private String CodigoVenta;
@@ -10,7 +11,7 @@ public class Venta {
     private Funcion theFuncion;
     private Cliente theCliente;
     private Operario theOperario;
-    private Boleto boletoVenta;
+    private List<Boleto> boletoVenta;
 
     /**
      * Metodo constructor de la clase Venta
@@ -21,7 +22,7 @@ public class Venta {
      * @param theOperario
      * @param boletoVenta
      */
-    public Venta(String codigoVenta, Cliente theCliente, LocalDate fecha, Funcion theFuncion, Operario theOperario, Boleto boletoVenta) {
+    private Venta(String codigoVenta, Cliente theCliente, LocalDate fecha, Funcion theFuncion, Operario theOperario, List<Boleto> boletoVenta) {
         CodigoVenta = codigoVenta;
         this.theCliente = theCliente;
         this.fecha = fecha;
@@ -70,11 +71,11 @@ public class Venta {
         this.theOperario = theOperario;
     }
 
-    public Boleto getBoletoVenta() {
+    public List<Boleto> getBoletoVenta() {
         return boletoVenta;
     }
 
-    public void setBoletoVenta(Boleto boletoVenta) {
+    public void setBoletoVenta(List<Boleto> boletoVenta) {
         this.boletoVenta = boletoVenta;
     }
 }

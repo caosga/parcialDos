@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Sala {
     private String codigoSala, nombre;
-    private int capacidad;
+    private double capacidad;
     private TipoSala tipo;
 
     //Relaciones de la clase Sala
@@ -45,7 +45,7 @@ public class Sala {
         this.nombre = nombre;
     }
 
-    public int getCapacidad() {
+    public double getCapacidad() {
         return capacidad;
     }
 
