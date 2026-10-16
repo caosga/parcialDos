@@ -1,5 +1,6 @@
 package uniquindio.edu.co.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,26 +61,36 @@ import java.util.List;
     //Metodo para programar una funcion
         public String programaFuncion(Funcion nuevaFuncion){
 
-            LocalDateTime inicioFuncion=nuevaFuncion.getHora();
+            LocalDateTime horaFuncion=nuevaFuncion.getHora();
+            LocalDate fechaFuncion=nuevaFuncion.getFecha();
+
             Sala salaNueva=nuevaFuncion.getTheSala();
             Pelicula peliculaNueva=nuevaFuncion.getThePelicula();
-
+        //calcula la duracion de la pelicula
             int duracionPel=peliculaNueva.getDuracion();
-           // LocalDateTime
-
+            LocalDateTime finPeli=horaFuncion.plusMinutes(duracionPel);
+        //verifica que la sala y pelicula existan
             if(salaNueva==null||peliculaNueva==null){
                 return "No hay una sala o pelicula asociada a esta funcion";
             }
 
         for(Funcion f:listCineFuncion){
-
-                return "";
+        //compara la sala y la fecha
+            if(f.getTheSala().getCodigoSala().equalsIgnoreCase(salaNueva.getCodigoSala())
+                    && f.getFecha().equals(fechaFuncion)){
+                LocalDateTime horaActual=f.getHora();
+                int duracionActual=f.getThePelicula().getDuracion();
+                LocalDateTime finActual=horaActual.plusMinutes(duracionActual);
+           //Compara las horas
+                if(horaActual.isBefore(finActual)&&horaActual.isBefore(finPeli)){
+                    return "La sala ocupada, no disponible.";
                 }
-
-
-
-        return "";
+            }
         }
+        this.listCineFuncion.add(nuevaFuncion);
+            return "Funcion programa exitosamente.";
+        }
+
 
     public String getNombreCine() {
         return nombreCine;
